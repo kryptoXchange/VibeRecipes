@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Strategy {
+  stitched
+  ai
+}
+
+enum ClipSource {
+  real
+  ai
+}
+
+enum ClipStatus {
+  approved
+  rejected
+}
+
+enum VideoStatus {
+  queued
+  running
+  done
+  failed
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  recipes   Recipe[]
+  likes     Like[]
+  ratings   Rating[]
+  createdAt DateTime @default(now())
+}
+
+model Recipe {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  ingredients Json     // [{ name, quantity, unit }]
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  steps       Step[]
+  videos      Video[]
+  likes       Like[]
+  createdAt   DateTime @default(now())
+}
+
+model Step {
+  id       String @id @default(cuid())
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
+  position Int
+  text     String
+  analysis Json?  // LLM output: technique, ingredients, equipment, seconds, caption
+
+  @@unique([recipeId, position])
+}
+
+model Video {
+  id            String      @id @default(cuid())
+  recipe        Recipe      @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId      String
+  strategy      Strategy
+  status        VideoStatus @default(queued)
+  url           String?
+  costUsd       Float?
+  durationS     Float?
+  renderSeconds Float?
+  error         String?
+  libraryGaps   Json?       // step positions that fell back to a placeholder
+  stepSources   Json?       // [{ position, source: "real"|"ai"|"placeholder", clipId }]
+  ratings       Rating[]
+  createdAt     DateTime    @default(now())
+}
+
+model ClipAsset {
+  id          String     @id @default(cuid())
+  source      ClipSource @default(real)
+  status      ClipStatus @default(approved)
+  file        String     // storage key
+  technique   String     // e.g. "dice", "sear", "fold"
+  ingredient  String?    // null = generic clip that fits any ingredient
+  description String?
+  tags        String[]
+  durationS   Float
+  prompt      String?    // AI clips: prompt that produced it
+  provider    String?    // AI clips: which generator
+  costUsd     Float?     // AI clips: generation cost
+  createdAt   DateTime   @default(now())
+
+  @@index([source, status, technique])
+}
+
+model Rating {
+  id               String @id @default(cuid())
+  video            Video  @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  videoId          String
+  reviewer         User   @relation(fields: [reviewerId], references: [id])
+  reviewerId       String
+  stepPosition     Int?
+  techniqueCorrect Int    // 1-5
+  ingredientsRight Int    // 1-5
+  clarity          Int    // 1-5
+  notes            String?
+}
+
+model Like {
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  recipeId String
+
+  @@id([userId, recipeId])
+}

@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: cooking
+      POSTGRES_PASSWORD: cooking
+      POSTGRES_DB: cooking
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+  s3:
+    image: chrislusf/seaweedfs
+    command: server -s3 -dir=/data -s3.port=8333
+    ports: ["8333:8333"]
+    volumes: [s3data:/data]
+volumes:
+  pgdata:
+  s3data:
