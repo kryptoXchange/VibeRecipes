@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" font-family="-apple-system,Helvetica,Arial,sans-serif">
+  <rect width="900" height="260" fill="#ffffff" rx="12"/>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs>
+  <g font-size="15" text-anchor="middle">
+    <rect x="20" y="70" width="150" height="120" rx="10" fill="#fff4e0" stroke="#e0a030"/>
+    <text x="95" y="100" font-weight="700" fill="#333">1. Recipe</text>
+    <text x="95" y="125" fill="#555" font-size="13">Title, ingredients</text>
+    <text x="95" y="145" fill="#555" font-size="13">and written steps</text>
+    <text x="95" y="170" font-size="26">📝</text>
+
+    <rect x="215" y="70" width="150" height="120" rx="10" fill="#e8f1ff" stroke="#4a86e8"/>
+    <text x="290" y="100" font-weight="700" fill="#333">2. Analyze</text>
+    <text x="290" y="125" fill="#555" font-size="13">Claude reads each step:</text>
+    <text x="290" y="145" fill="#555" font-size="13">technique + ingredients</text>
+    <text x="290" y="170" font-size="26">🔍</text>
+
+    <rect x="410" y="70" width="150" height="120" rx="10" fill="#eafaf0" stroke="#3aa76d"/>
+    <text x="485" y="100" font-weight="700" fill="#333">3. Find a clip</text>
+    <text x="485" y="125" fill="#555" font-size="13">Clip library, or an</text>
+    <text x="485" y="145" fill="#555" font-size="13">AI-generated clip</text>
+    <text x="485" y="170" font-size="26">🎬</text>
+
+    <rect x="605" y="70" width="150" height="120" rx="10" fill="#f4eaff" stroke="#9b59d0"/>
+    <text x="680" y="100" font-weight="700" fill="#333">4. Assemble</text>
+    <text x="680" y="125" fill="#555" font-size="13">FFmpeg adds captions</text>
+    <text x="680" y="145" fill="#555" font-size="13">and joins the clips</text>
+    <text x="680" y="170" font-size="26">🎞️</text>
+
+    <rect x="790" y="95" width="90" height="70" rx="10" fill="#333"/>
+    <text x="835" y="125" fill="#fff" font-weight="700">Video</text>
+    <text x="835" y="147" fill="#ddd" font-size="12">MP4</text>
+  </g>
+  <g stroke="#555" stroke-width="2" marker-end="url(#a)">
+    <line x1="172" y1="130" x2="212" y2="130"/><line x1="367" y1="130" x2="407" y2="130"/>
+    <line x1="562" y1="130" x2="602" y2="130"/><line x1="757" y1="130" x2="787" y2="130"/>
+  </g>
+  <text x="450" y="40" text-anchor="middle" font-size="20" font-weight="700" fill="#222">From recipe text to a step-by-step video</text>
+</svg>

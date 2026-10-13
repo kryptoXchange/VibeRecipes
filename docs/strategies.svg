@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" font-family="-apple-system,Helvetica,Arial,sans-serif">
+  <rect width="900" height="360" fill="#ffffff" rx="12"/>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs>
+  <text x="450" y="36" text-anchor="middle" font-size="20" font-weight="700" fill="#222">Two ways to get a clip for each step</text>
+
+  <text x="225" y="76" text-anchor="middle" font-size="16" font-weight="700" fill="#2d7a4f">Stitched (real footage)</text>
+  <g font-size="13" text-anchor="middle" fill="#333">
+    <rect x="40" y="95" width="370" height="46" rx="8" fill="#eafaf0" stroke="#3aa76d"/><text x="225" y="123">Real clip library (filmed by you)</text>
+    <rect x="40" y="170" width="370" height="46" rx="8" fill="#e8f1ff" stroke="#4a86e8"/><text x="225" y="198">Else: AI clip library (earlier generations)</text>
+    <rect x="40" y="245" width="370" height="46" rx="8" fill="#fff4e0" stroke="#e0a030"/><text x="225" y="273">Else: title card, logged as a "library gap"</text>
+  </g>
+  <g stroke="#555" stroke-width="2" marker-end="url(#a)"><line x1="225" y1="143" x2="225" y2="168"/><line x1="225" y1="218" x2="225" y2="243"/></g>
+  <text x="225" y="322" text-anchor="middle" font-size="12" fill="#666">Cheap and accurate, but only covers what you have filmed</text>
+
+  <text x="675" y="76" text-anchor="middle" font-size="16" font-weight="700" fill="#7a3fb0">AI (generated)</text>
+  <g font-size="13" text-anchor="middle" fill="#333">
+    <rect x="490" y="95" width="370" height="46" rx="8" fill="#e8f1ff" stroke="#4a86e8"/><text x="675" y="123">Reuse a matching AI clip if one exists</text>
+    <rect x="490" y="170" width="370" height="46" rx="8" fill="#f4eaff" stroke="#9b59d0"/><text x="675" y="198">Else: generate a new clip from the step text</text>
+    <rect x="490" y="245" width="370" height="46" rx="8" fill="#e8f1ff" stroke="#4a86e8"/><text x="675" y="273">Save it to the AI library for next time</text>
+  </g>
+  <g stroke="#555" stroke-width="2" marker-end="url(#a)"><line x1="675" y1="143" x2="675" y2="168"/><line x1="675" y1="218" x2="675" y2="243"/></g>
+  <text x="675" y="322" text-anchor="middle" font-size="12" fill="#666">Covers any recipe, but costs money and can look wrong</text>
+</svg>
