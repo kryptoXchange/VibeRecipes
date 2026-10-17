@@ -41,5 +41,8 @@ Node 20+, Docker, FFmpeg, Python 3.9+.
     # in another terminal:
     cd worker && . .venv/bin/activate && python main.py   # renders queued videos
 
+Accounts: sign up at `/signup`, or log in with the seeded dev account `dev@cooking.local` / `cooking123`.
+Set `AUTH_SECRET` in `.env` to a long random string (e.g. `openssl rand -base64 32`); production refuses `change-me`.
+
 The web app creates `Video` rows with status `queued`; the worker polls Postgres,
 renders them with FFmpeg, uploads to the S3 store, and sets `done` or `failed`.

@@ -1,10 +1,17 @@
+import { redirect } from "next/navigation";
 import { db } from "./db";
+import { readSessionUserId } from "./session";
 
-// TODO: replace with Auth.js. Until then every request acts as a single dev user.
+const select = { id: true, email: true, name: true } as const;
+
+export async function getOptionalUser() {
+  const id = await readSessionUserId();
+  return id ? db.user.findUnique({ where: { id }, select }) : null;
+}
+
+// Use in pages and actions that need a signed-in user; sends visitors to /login.
 export async function getCurrentUser() {
-  return db.user.upsert({
-    where: { email: "dev@cooking.local" },
-    update: {},
-    create: { email: "dev@cooking.local", name: "Dev Cook" },
-  });
+  const user = await getOptionalUser();
+  if (!user) redirect("/login");
+  return user;
 }

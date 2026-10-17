@@ -10,13 +10,6 @@ export default async function Home() {
 
   return (
     <main className="mx-auto max-w-3xl p-6">
-      <header className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Cooking</h1>
-        <nav className="flex items-center gap-4">
-          <Link href="/admin/clips" className="text-sm underline">Clip library</Link>
-          <Link href="/recipes/new" className="rounded bg-orange-600 px-3 py-1.5 text-white">Post a recipe</Link>
-        </nav>
-      </header>
       {recipes.length === 0 && <p className="text-neutral-500">No recipes yet. Post the first one.</p>}
       <ul className="space-y-3">
         {recipes.map((r) => (

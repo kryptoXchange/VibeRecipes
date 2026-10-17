@@ -1,12 +1,14 @@
 import { PrismaClient } from "@prisma/client";
+import { hashPassword } from "../src/lib/password";
 
 const db = new PrismaClient();
 
 async function main() {
+  const passwordHash = await hashPassword("cooking123");
   const user = await db.user.upsert({
     where: { email: "dev@cooking.local" },
-    update: {},
-    create: { email: "dev@cooking.local", name: "Dev Cook" },
+    update: { passwordHash },
+    create: { email: "dev@cooking.local", name: "Dev Cook", passwordHash },
   });
   if ((await db.recipe.count()) > 0) return;
   await db.recipe.create({
